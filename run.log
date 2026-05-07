@@ -1,0 +1,101 @@
+Dataset: digits
+  1797 instances, 64 features, 10 classes, 10 output neuron(s)
+Stopping criterion: fixed iterations max_iter=500
+Learning rate: alpha=0.5  |  k=10 folds  |  seed=42
+
+[1/6] arch=[64, 8, 10]  λ=0.000  ...  acc=0.7539  f1=0.7601
+[2/6] arch=[64, 16, 10]  λ=0.000  ...  acc=0.8615  f1=0.8741
+[3/6] arch=[64, 32, 10]  λ=0.000  ...  acc=0.8842  f1=0.8922
+[4/6] arch=[64, 16, 10]  λ=0.100  ...  acc=0.8599  f1=0.8725
+[5/6] arch=[64, 16, 10]  λ=1.000  ...  acc=0.8482  f1=0.8615
+[6/6] arch=[64, 16, 8, 10]  λ=0.000  ...  acc=0.0991  f1=0.0180
+
+============================================================
+      architecture  lambda  mean_accuracy  mean_f1
+0     [64, 32, 10]     0.0        0.88421  0.89221
+1     [64, 16, 10]     0.0        0.86152  0.87408
+2     [64, 16, 10]     0.1        0.85988  0.87246
+3     [64, 16, 10]     1.0        0.84816  0.86152
+4      [64, 8, 10]     0.0        0.75392  0.76009
+5  [64, 16, 8, 10]     0.0        0.09905  0.01802
+
+Results saved to results_digits.csv
+
+Best: arch=[64, 32, 10]  λ=0.0  acc=0.88421  f1=0.89221
+Dataset: parkinsons.csv
+  195 instances, 22 features, 2 classes, 1 output neuron(s)
+Stopping criterion: fixed iterations max_iter=500
+Learning rate: alpha=0.5  |  k=10 folds  |  seed=42
+
+[1/6] arch=[22, 8, 1]  λ=0.000  ...  acc=0.8267  f1=0.7268
+[2/6] arch=[22, 16, 1]  λ=0.000  ...  acc=0.8270  f1=0.7356
+[3/6] arch=[22, 32, 1]  λ=0.000  ...  acc=0.8423  f1=0.7529
+[4/6] arch=[22, 16, 1]  λ=0.100  ...  acc=0.8270  f1=0.7356
+[5/6] arch=[22, 16, 1]  λ=1.000  ...  acc=0.8417  f1=0.7352
+[6/6] arch=[22, 16, 8, 1]  λ=0.000  ...  acc=0.7542  f1=0.4299
+
+============================================================
+     architecture  lambda  mean_accuracy  mean_f1
+0     [22, 32, 1]     0.0        0.84225  0.75288
+1     [22, 16, 1]     0.0        0.82699  0.73563
+2     [22, 16, 1]     0.1        0.82699  0.73563
+3     [22, 16, 1]     1.0        0.84170  0.73516
+4      [22, 8, 1]     0.0        0.82670  0.72680
+5  [22, 16, 8, 1]     0.0        0.75424  0.42992
+
+Results saved to results_parkinsons.csv
+
+Best: arch=[22, 32, 1]  λ=0.0  acc=0.84225  f1=0.75288
+Traceback (most recent call last):
+  File "/Users/shhreya/Downloads/HW4589/experiments.py", line 140, in <module>
+    run_grid_search(args.data, data_path=args.data, output_csv=args.output)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shhreya/Downloads/HW4589/experiments.py", line 92, in run_grid_search
+    X, y = load_rice(data_path)
+           ~~~~~~~~~^^^^^^^^^^^
+  File "/Users/shhreya/Downloads/HW4589/data_utils.py", line 136, in load_rice
+    y = df['label'].values.astype(int)
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/core/arrays/string_.py", line 944, in astype
+    return super().astype(dtype, copy)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/core/arrays/numpy_.py", line 280, in astype
+    result = astype_array(self._ndarray, dtype=dtype, copy=copy)
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/core/dtypes/astype.py", line 185, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/core/dtypes/astype.py", line 134, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'Cammeo'
+Traceback (most recent call last):
+  File "/Users/shhreya/Downloads/HW4589/experiments.py", line 140, in <module>
+    run_grid_search(args.data, data_path=args.data, output_csv=args.output)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shhreya/Downloads/HW4589/experiments.py", line 95, in run_grid_search
+    X, y = load_credit(data_path)
+           ~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/shhreya/Downloads/HW4589/data_utils.py", line 151, in load_credit
+    df = pd.read_csv(path)
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/anaconda3/envs/cs589/lib/python3.14/site-packages/pandas/io/common.py", line 926, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: 'credit.csv'
