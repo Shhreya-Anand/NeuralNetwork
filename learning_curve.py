@@ -174,3 +174,10 @@ if __name__ == "__main__":
         output_path=args.output,
     )
  
+
+'''
+Note to use: run theses commands: 
+python learning_curve.py --data digits --hidden 32 --lam 0.0 --output learning_curve_digits.png
+    this format can be used for all datasets- just input the best architechutre you found
+
+'''
