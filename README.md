@@ -1,4 +1,4 @@
-# Neural Network — Backpropagation Assignment
+# Neural Network: Backprop. forward prop, training
 
 ## File structure
 
@@ -11,7 +11,7 @@ neural_net/
 ├── experiments.py        # Grid search: architectures × λ values
 └── main.py               # Top-level entry point (all modes)
 ```
-
+- evaluated on performance of k=10 fold cross validation
 ---
 
 
