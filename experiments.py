@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from neural_network import init_weights, train, predict
 from cross_validation import stratified_kfold_split, accuracy, f1_macro
-from data_utils import load_digits_dataset, load_parkinsons, load_rice,load_credit, normalize, labels_to_output_matrix,labels_to_onehot, onehot_to_labels,output_matrix_to_labels, load_adult_income
+from data_utils import load_digits_dataset, load_parkinsons, load_rice,load_credit, normalize, labels_to_output_matrix,labels_to_onehot, onehot_to_labels,output_matrix_to_labels, load_penguins
 
 
 #hyperparams
@@ -94,9 +94,9 @@ def run_grid_search(dataset_name, data_path=None, output_csv="results.csv"):
     elif "credit" in dataset_name.lower():
         X, y = load_credit(data_path)
         n_outputs = 1
-    elif "adult" in dataset_name.lower():
-        X, y = load_adult_income(data_path)
-        n_outputs = 1
+    elif "penguins" in dataset_name.lower():
+        X, y = load_penguins(data_path)
+        n_outputs = 3 #3 clases
     else:
         raise ValueError(f"Unknown dataset: {dataset_name}")
  

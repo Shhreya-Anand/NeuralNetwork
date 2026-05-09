@@ -21,7 +21,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from neural_network import init_weights, train, compute_cost
 from cross_validation import stratified_kfold_split
-from data_utils import load_loan, load_wdbc, load_titanic, normalize, labels_to_output_matrix, load_adult_income, load_credit, load_digits_dataset, load_parkinsons, load_rice, labels_to_onehot
+from data_utils import load_loan, load_wdbc, load_titanic, normalize, labels_to_output_matrix, load_credit, load_digits_dataset, load_parkinsons, load_rice, labels_to_onehot, load_penguins
 
 
 # Default hyperparameters- can override via cli so its ag 
@@ -45,8 +45,8 @@ def load_data(data_arg):
         X, y = load_rice(data_arg);  return X, y, 1
     elif "credit" in d:
         X, y = load_credit(data_arg);  return X, y, 1
-    elif "adult" in d or "income" in d:
-        X, y = load_adult_income(data_arg);  return X, y, 1
+    elif "penguins" in d or "encoded" in d:
+        X, y = load_penguins(data_arg);  return X, y, 3
     elif "loan" in d:
         X, y = load_loan(data_arg);  return X, y, 1
     elif "titanic" in d:

@@ -194,40 +194,58 @@ def onehot_to_labels(Y_pred):
 returns X: (n_sampels, n_features)- float array ; y: (n_samples) - int arr
 
 '''
-def load_adult_income(path, n_samples=3000, seed=42):
-    rng = np.random.default_rng(seed)
-    df = pd.read_csv(path)
+# def load_adult_income(path, n_samples=3000, seed=42):
+#     rng = np.random.default_rng(seed)
+#     df = pd.read_csv(path)
  
-    # Encode label
-    df['label'] = (df['income'] == '>50K').astype(int)
+#     # Encode label
+#     df['label'] = (df['income'] == '>50K').astype(int)
  
-    # Drop unhelpful columns
-    df = df.drop(columns=['income', 'fnlwgt', 'native-country'])
+#     # Drop unhelpful columns
+#     df = df.drop(columns=['income', 'fnlwgt', 'native-country'])
  
-    # Stratified subsample
-    class0 = df[df['label'] == 0]
-    class1 = df[df['label'] == 1]
-    # Keep class ratio: ~76% class0, ~24% class1
-    n0 = int(n_samples * len(class0) / len(df))
-    n1 = n_samples - n0
-    idx0 = rng.choice(len(class0), n0, replace=False)
-    idx1 = rng.choice(len(class1), n1, replace=False)
-    df = pd.concat([class0.iloc[idx0], class1.iloc[idx1]]).reset_index(drop=True)
+#     # Stratified subsample
+#     class0 = df[df['label'] == 0]
+#     class1 = df[df['label'] == 1]
+#     # Keep class ratio: ~76% class0, ~24% class1
+#     n0 = int(n_samples * len(class0) / len(df))
+#     n1 = n_samples - n0
+#     idx0 = rng.choice(len(class0), n0, replace=False)
+#     idx1 = rng.choice(len(class1), n1, replace=False)
+#     df = pd.concat([class0.iloc[idx0], class1.iloc[idx1]]).reset_index(drop=True)
  
-    # One-hot encode categorical columns
-    cat_cols = ['workclass', 'education', 'marital-status',
-                'occupation', 'relationship', 'race', 'gender']
-    num_cols = ['age', 'educational-num', 'capital-gain',
-                'capital-loss', 'hours-per-week']
+#     # One-hot encode categorical columns
+#     cat_cols = ['workclass', 'education', 'marital-status',
+#                 'occupation', 'relationship', 'race', 'gender']
+#     num_cols = ['age', 'educational-num', 'capital-gain',
+#                 'capital-loss', 'hours-per-week']
  
-    dummies = pd.get_dummies(df[cat_cols], drop_first=False, dtype=float)
-    X_df = pd.concat([dummies, df[num_cols].astype(float)], axis=1)
-    X = X_df.values.astype(float)
-    y = df['label'].values.astype(int)
+#     dummies = pd.get_dummies(df[cat_cols], drop_first=False, dtype=float)
+#     X_df = pd.concat([dummies, df[num_cols].astype(float)], axis=1)
+#     X = X_df.values.astype(float)
+#     y = df['label'].values.astype(int)
 
-    # Save preprocessed dataset- remeber to send it to the rest
-    out_df = pd.DataFrame(X_df)
-    out_df['label'] = y
-    out_df.to_csv('newadultincome.csv', index=False)
+#     # Save preprocessed dataset- remeber to send it to the rest
+#     out_df = pd.DataFrame(X_df)
+#     out_df['label'] = y
+#     out_df.to_csv('newadultincome.csv', index=False)
  
+#     return X, y
+
+def load_penguins(path):
+    """Load the Palmer Penguins dataset.
+ 
+    Already one-hot encoded. 333 instances, 10 features, 3 classes.
+    Label column is 'species': 0=Adelie, 1=Chinstrap, 2=Gentoo.
+    Multi-class — use labels_to_onehot and 3 output neurons.
+ 
+    Returns
+    -------
+    X : (333, 10) float array
+    y : (333,)    int array
+    """
+    df = pd.read_csv(path)
+    feature_cols = [c for c in df.columns if c != 'species']
+    X = df[feature_cols].values.astype(float)
+    y = df['species'].values.astype(int)
     return X, y
